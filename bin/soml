@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+$autoload = $GLOBALS['_composer_autoload_path'] ?? __DIR__ . '/../vendor/autoload.php';
+
+if (!is_string($autoload) || !is_file($autoload)) {
+	fwrite(STDERR, "Install dependencies with composer install before running soml.\n");
+	exit(1);
+}
+
+require $autoload;
+
+exit(Soml\Command::run(array_slice($argv ?? [], 1)));

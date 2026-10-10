@@ -1,0 +1,32 @@
+name: CI
+on: [push, pull_request]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - '8.4'
+          - '8.5'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+      - run: composer validate --strict
+      - run: composer install --no-interaction --no-progress
+      - run: composer audit --no-interaction
+      - run: composer test
+      # The tracing JIT compiles the hot paths differently, so the suite runs with it too.
+      - name: Test with JIT
+        run: php -d opcache.enable_cli=1 -d opcache.jit=tracing -d opcache.jit_buffer_size=64M vendor/bin/phpunit

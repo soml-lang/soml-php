@@ -1,0 +1,23 @@
+{
+	"name": "soml/soml-benchmark",
+	"description": "Compares soml-php with the most used JSON and TOML libraries",
+	"type": "project",
+	"license": "MIT",
+	"require": {
+		"php": ">=8.4",
+		"devium/toml": "*",
+		"internal/toml": "*",
+		"soml/soml": "*"
+	},
+	"repositories": [
+		{
+			"type": "path",
+			"url": "..",
+			"options": {
+				"symlink": true
+			}
+		}
+	],
+	"minimum-stability": "dev",
+	"prefer-stable": true
+}

@@ -1,0 +1,19 @@
+includes:
+	- vendor/phpstan/phpstan-phpunit/extension.neon
+	- vendor/phpstan/phpstan-phpunit/rules.neon
+
+parameters:
+	level: max
+	phpVersion:
+		min: 80400
+		max: 80599
+	paths:
+		- src
+		- tests
+		- bench/measure.php
+		- bench/library.php
+		- tools
+		- bin/soml
+	excludePaths:
+		- tests/conformance
+		- tests/differential

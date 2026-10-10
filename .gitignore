@@ -1,0 +1,5 @@
+/vendor/
+/composer.lock
+/.phpunit.cache/
+/bench/vendor/
+/bench/composer.lock

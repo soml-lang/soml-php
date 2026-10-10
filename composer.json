@@ -1,0 +1,66 @@
+{
+	"name": "soml/soml",
+	"description": "Read and write SOML, a config format for humans",
+	"license": "MIT",
+	"type": "library",
+	"bin": [
+		"bin/soml"
+	],
+	"keywords": [
+		"soml",
+		"config",
+		"configuration",
+		"parser",
+		"serializer",
+		"decode",
+		"encode",
+		"toml",
+		"yaml",
+		"json"
+	],
+	"authors": [
+		{
+			"name": "Sindre Sorhus",
+			"email": "sindresorhus@gmail.com",
+			"homepage": "https://sindresorhus.com"
+		}
+	],
+	"homepage": "https://github.com/soml-lang/soml-php",
+	"support": {
+		"issues": "https://github.com/soml-lang/soml-php/issues",
+		"source": "https://github.com/soml-lang/soml-php"
+	},
+	"require": {
+		"composer-runtime-api": "^2.2",
+		"php": ">=8.4",
+		"php-64bit": "*"
+	},
+	"require-dev": {
+		"phpstan/phpstan": "^2.3",
+		"phpstan/phpstan-phpunit": "^2.1",
+		"phpunit/phpunit": "^13.4"
+	},
+	"autoload": {
+		"psr-4": {
+			"Soml\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Soml\\Tests\\": "tests/"
+		}
+	},
+	"config": {
+		"sort-packages": true
+	},
+	"scripts": {
+		"test": [
+			"@lint",
+			"phpunit",
+			"phpstan analyse --memory-limit=1G"
+		],
+		"test:differential": "@php tests/differential/run.php",
+		"lint": "@php tools/lint.php",
+		"benchmark": "@php bench/library.php"
+	}
+}
